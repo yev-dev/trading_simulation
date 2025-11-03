@@ -1,0 +1,53 @@
+{
+    "files.associations": {
+        "*.h": "cpp",
+        "*.cpp": "cpp",
+        "iostream": "cpp",
+        "string": "cpp",
+        "vector": "cpp",
+        "map": "cpp",
+        "queue": "cpp",
+        "chrono": "cpp",
+        "random": "cpp",
+        "memory": "cpp",
+        "functional": "cpp",
+        "iomanip": "cpp",
+        "algorithm": "cpp",
+        "cmath": "cpp",
+        "thread": "cpp"
+    },
+    "C_Cpp.default.cppStandard": "c++17",
+    "C_Cpp.default.cStandard": "c17",
+    "C_Cpp.default.compilerPath": "/usr/bin/g++",
+    "C_Cpp.default.includePath": [
+        "${workspaceFolder}/**",
+        "${workspaceFolder}/include",
+        "${workspaceFolder}/src",
+        "${workspaceFolder}/tests"
+    ],
+    "C_Cpp.default.defines": [
+        "_DEBUG",
+        "UNICODE",
+        "_UNICODE"
+    ],
+    "C_Cpp.default.intelliSenseMode": "macos-gcc-x64",
+    "C_Cpp.errorSquiggles": "enabled",
+    "C_Cpp.autocomplete": "default",
+    "C_Cpp.suggestSnippets": true,
+    "editor.formatOnSave": true,
+    "editor.insertSpaces": true,
+    "editor.tabSize": 4,
+    "editor.detectIndentation": false,
+    "files.trimTrailingWhitespace": true,
+    "files.insertFinalNewline": true,
+    "files.trimFinalNewlines": true,
+    "terminal.integrated.cwd": "${workspaceFolder}",
+    "cmake.configureOnOpen": false,
+    "makefile.extensionOutputFolder": "./.vscode",
+    "debug.allowBreakpointsEverywhere": true,
+    "debug.console.fontSize": 14,
+    "debug.console.lineHeight": 18,
+    "workbench.editor.enablePreview": false,
+    "explorer.confirmDelete": false,
+    "explorer.confirmDragAndDrop": false
+}

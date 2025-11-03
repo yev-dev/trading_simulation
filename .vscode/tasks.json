@@ -1,0 +1,195 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Build Trading Simulation",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "-O0",
+                "-Iinclude",
+                "main.cpp",
+                "src/Order.cpp",
+                "src/Portfolio.cpp",
+                "src/Market.cpp",
+                "src/TradingEngine.cpp",
+                "-o",
+                "build/TradingSimulation",
+                "-pthread"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": {
+                "kind": "build",
+                "isDefault": false
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build the main trading simulation with debug symbols",
+            "dependsOn": "Create Build Directory"
+        },
+        {
+            "type": "shell",
+            "label": "Build Tests",
+            "command": "g++",
+            "args": [
+                "-std=c++17",
+                "-Wall",
+                "-Wextra",
+                "-g",
+                "-O0",
+                "-Iinclude",
+                "-Itests",
+                "tests/TestRunner.cpp",
+                "tests/OrderTests.cpp",
+                "tests/PortfolioTests.cpp",
+                "tests/MarketTests.cpp",
+                "tests/TradingEngineTests.cpp",
+                "src/Order.cpp",
+                "src/Portfolio.cpp",
+                "src/Market.cpp",
+                "src/TradingEngine.cpp",
+                "-o",
+                "build/RunTests",
+                "-pthread"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build the test suite with debug symbols",
+            "dependsOn": "Create Build Directory"
+        },
+        {
+            "type": "shell",
+            "label": "Create Build Directory",
+            "command": "mkdir",
+            "args": [
+                "-p",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "detail": "Create build directory if it doesn't exist"
+        },
+        {
+            "type": "shell",
+            "label": "Clean Build",
+            "command": "rm",
+            "args": [
+                "-rf",
+                "build"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "detail": "Clean all build artifacts"
+        },
+        {
+            "type": "shell",
+            "label": "Run Trading Simulation",
+            "command": "./build/TradingSimulation",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Run the trading simulation",
+            "dependsOn": "Build Trading Simulation"
+        },
+        {
+            "type": "shell",
+            "label": "Run Tests",
+            "command": "./build/RunTests",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "problemMatcher": [],
+            "detail": "Run all tests",
+            "dependsOn": "Build Tests"
+        },
+        {
+            "type": "shell",
+            "label": "Make Build",
+            "command": "make",
+            "args": [],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build using Makefile"
+        },
+        {
+            "type": "shell",
+            "label": "Make Tests",
+            "command": "make",
+            "args": [
+                "tests"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "test",
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "detail": "Build tests using Makefile"
+        },
+        {
+            "type": "shell",
+            "label": "Make Run",
+            "command": "make",
+            "args": [
+                "run"
+            ],
+            "options": {
+                "cwd": "${workspaceFolder}"
+            },
+            "group": "build",
+            "problemMatcher": [],
+            "detail": "Build and run using Makefile"
+        },
+        {
+            "type": "cppbuild",
+            "label": "C/C++: clang++ build active file",
+            "command": "/usr/bin/clang++",
+            "args": [
+                "-fcolor-diagnostics",
+                "-fansi-escape-codes",
+                "-g",
+                "${file}",
+                "-o",
+                "${fileDirname}/${fileBasenameNoExtension}"
+            ],
+            "options": {
+                "cwd": "${fileDirname}"
+            },
+            "problemMatcher": [
+                "$gcc"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "detail": "Task generated by Debugger."
+        }
+    ]
+}
