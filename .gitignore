@@ -30,7 +30,7 @@ CTestTestfile.cmake
 install_manifest.txt
 
 # IDE and editor files
-.vscode/
+# .vscode/
 .vs/
 .idea/
 *.swp

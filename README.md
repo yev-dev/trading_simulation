@@ -147,17 +147,17 @@ engine.runSimulation(30);
 // Momentum trading strategy
 for (int day = 0; day < 30; ++day) {
     market.updatePrices();
-    
+
     for (const std::string& symbol : market.getAvailableSymbols()) {
         double dailyReturn = market.getDailyReturn(symbol);
-        
+
         if (dailyReturn > 2.0) {  // Strong positive momentum
             engine.executeMarketOrder(symbol, OrderType::BUY, 10);
         } else if (dailyReturn < -2.0 && portfolio.hasPosition(symbol)) {
             engine.executeMarketOrder(symbol, OrderType::SELL, 5);
         }
     }
-    
+
     engine.processOrders();
 }
 ```
@@ -257,3 +257,9 @@ This project is provided as an educational example of C++ trading simulation sys
 - [ ] Database integration
 - [ ] Multi-threading support
 - [ ] Configuration file support
+
+
+```
+g++ -std=c++17 -Wall -Wextra -g -O0 -Iinclude main.cpp src/*.cpp -o TradingSimulation -pthread
+
+```
