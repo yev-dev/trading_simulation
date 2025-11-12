@@ -5,7 +5,33 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "C++: Debug active file (LLDB/GDB)",
+            "name": "C++: Run active file (no debug)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${fileDirname}/${fileBasenameNoExtension}",
+            "args": [],
+            "cwd": "${fileDirname}",
+            "externalConsole": false,
+            "preLaunchTask": "C/C++: build active file (auto)",
+            "MIMode": "gdb",
+            "osx": {
+                "program": "${fileDirname}/${fileBasenameNoExtension}",
+                "MIMode": "lldb",
+                "preLaunchTask": "C/C++: clang++ build active file"
+            },
+            "linux": {
+                "program": "${fileDirname}/${fileBasenameNoExtension}",
+                "MIMode": "gdb",
+                "preLaunchTask": "C/C++: g++ build active file"
+            },
+            "windows": {
+                "program": "${fileDirname}\\${fileBasenameNoExtension}.exe",
+                "MIMode": "gdb",
+                "preLaunchTask": "C/C++: g++.exe build active file"
+            }
+        },
+        {
+            "name": "C++: Debug active file (GDB/LLDB)",
             "type": "cppdbg",
             "request": "launch",
             "program": "${fileDirname}/${fileBasenameNoExtension}",
@@ -49,10 +75,54 @@
             "cwd": "${fileDirname}",
             "environment": [],
             "console": "integratedTerminal",
-            "preLaunchTask": "C/C++: cl.exe build active file",
+            "preLaunchTask": "C/C++: cl.exe build active file"
+        },
+        {
+            "name": "C++: Debug TradingSimulation (project)",
+            "type": "cppdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}/build/TradingSimulation",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "externalConsole": false,
+            "preLaunchTask": "Build Trading Simulation",
+            "MIMode": "gdb",
+            "setupCommands": [
+                {
+                    "description": "Enable pretty-printing for gdb",
+                    "text": "-enable-pretty-printing",
+                    "ignoreFailures": true
+                }
+            ],
+            "osx": {
+                "program": "${workspaceFolder}/build/TradingSimulation",
+                "MIMode": "lldb",
+                "preLaunchTask": "Build Trading Simulation"
+            },
+            "linux": {
+                "program": "${workspaceFolder}/build/TradingSimulation",
+                "MIMode": "gdb",
+                "preLaunchTask": "Build Trading Simulation"
+            },
             "windows": {
-                "type": "cppvsdbg"
+                "program": "${workspaceFolder}\\build\\TradingSimulation.exe",
+                "MIMode": "gdb",
+                "preLaunchTask": "Build Trading Simulation"
             }
+        },
+        {
+            "name": "C++: Debug TradingSimulation (MSVC)",
+            "type": "cppvsdbg",
+            "request": "launch",
+            "program": "${workspaceFolder}\\build\\TradingSimulation.exe",
+            "args": [],
+            "stopAtEntry": false,
+            "cwd": "${workspaceFolder}",
+            "environment": [],
+            "console": "integratedTerminal",
+            "preLaunchTask": "Build Trading Simulation"
         }
     ]
 }

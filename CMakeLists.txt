@@ -5,6 +5,7 @@ project(TradingSimulation VERSION 1.0.0 LANGUAGES CXX)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
+# set(CMAKE_EXPORT_COMPILE_COMMANDS ON) # For VSCode Intellisense
 
 # Set build type if not specified
 if(NOT CMAKE_BUILD_TYPE)
@@ -25,6 +26,8 @@ set(SOURCES
     src/Portfolio.cpp
     src/Market.cpp
     src/TradingEngine.cpp
+    src/MomentumStrategy.cpp
+    src/TradingEngineMCPAdapter.cpp
 )
 
 # Header files (for IDE)
@@ -33,6 +36,9 @@ set(HEADERS
     include/Portfolio.h
     include/Market.h
     include/TradingEngine.h
+    include/IStrategy.h
+    include/ITradingEngineAPI.h
+    include/ITradingListener.h
 )
 
 # Create executable

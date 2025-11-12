@@ -263,3 +263,36 @@ This project is provided as an educational example of C++ trading simulation sys
 g++ -std=c++17 -Wall -Wextra -g -O0 -Iinclude main.cpp src/*.cpp -o TradingSimulation -pthread
 
 ```
+
+
+What I added
+
+ITradingEngineAPI.h
+
+A minimal, documented interface for external agents to interact with the engine.
+Methods include submitOrder, executeMarketOrder, executeLimitOrder, cancelOrder, queries (executed orders, pending count, current price, available symbols), simulation control (runSimulation, stopSimulation) and listener registration hooks.
+Designed to be lightweight and easy to wrap behind an IPC transport (JSON-RPC, REST, sockets, etc.).
+TradingEngineMCPAdapter.cpp
+
+An in-process adapter that implements ITradingEngineAPI by delegating to an existing TradingEngine instance.
+Acts as the component you can call from your MCP server implementation: MCP handler -> TradingEngineMCPAdapter -> TradingEngine.
+stopSimulation and listener registration are left as no-ops or placeholders because the current TradingEngine implementation doesn't provide those primitives; the adapter includes comments on how to extend the engine.
+CMakeLists.txt
+
+Registered the new adapter source and the API header so IDEs and builds pick them up.
+Notes and next steps
+
+stopSimulation: TradingEngine currently has no async stop API. If you need to stop a running simulation from an external agent, add a stop flag and a check in the simulation loop (or provide an interrupt mechanism). I can implement this if you want.
+Listener support: If you want external agents to receive push notifications (order executed, order failed, etc.), make TradingEngine manage a list of ITradingListener pointers and call them as events happen; the adapter can register a listener that forwards events out over IPC. I included registerListener/unregisterListener in the API to make this wiring straightforward.
+Serialization: The API uses C++ types (Order, vector<Order>, etc.). For real IPC you’ll need to serialize/deserialize Orders (JSON or protobuf). I can add helper converters (Order <-> JSON) or implement a small JSON-RPC wrapper around the adapter.
+Thread-safety: IPC handlers typically run in separate threads. If your external agent will call the adapter concurrently, consider adding mutexes around the engine calls or ensure TradingEngine is thread-safe.
+Examples I can add next (pick one):
+
+Make TradingEngine accept ITradingListener* and call listeners on order events, plus implement a listener in the adapter that forwards events to a JSON socket.
+Add a stop flag and implement TradingEngine::requestStop() and have adapter call it.
+Implement JSON serialization helpers for Order and Market so the adapter can return JSON-able structures.
+Would you like me to:
+
+Implement listener wiring so external agents can receive events?
+Add a stopSimulation implementation (engine-side and adapter-side)?
+Provide JSON serialization helpers and a small example IPC server wrapper (HTTP/REST or simple TCP)?
